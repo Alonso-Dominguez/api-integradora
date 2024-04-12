@@ -19,6 +19,7 @@ try:
     ESCANEO = db['escaneo']
     REPORTES = db['reportes']
     RUTA = db['ruta']
+    HORARIOS = db['horarios']
     UNIDADES = db['unidades']
 
     # Imprime un mensaje si la conexión es exitosa
@@ -98,12 +99,12 @@ async def get_all_choferes():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error interno del servidor, {e}")
 
-# Define el endpoint GET para consultar todos los documentos en la colección "checador"
+# Define el endpoint GET para consultar todos los documentos en la colección "escaneo"
 @app.get("/escaneo/")
 async def get_all_escaneos():
     respuesta = []
     try:
-        # Consulta todos los documentos en la colección "asignacion"
+        # Consulta todos los documentos en la colección "escaneo"
         escaneos = ESCANEO.find()
 
         for escaneo in escaneos:
@@ -115,12 +116,12 @@ async def get_all_escaneos():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error interno del servidor, {e}")
     
-# Define el endpoint GET para consultar todos los documentos en la colección "checador"
+# Define el endpoint GET para consultar todos los documentos en la colección "reportes"
 @app.get("/reportes/")
 async def get_all_reportes():
     respuesta = []
     try:
-        # Consulta todos los documentos en la colección "asignacion"
+        # Consulta todos los documentos en la colección "reportes"
         reportes = REPORTES.find()
 
         for reporte in reportes:
@@ -132,12 +133,12 @@ async def get_all_reportes():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error interno del servidor, {e}")
     
-# Define el endpoint GET para consultar todos los documentos en la colección "checador"
+# Define el endpoint GET para consultar todos los documentos en la colección "ruta"
 @app.get("/ruta/")
 async def get_all_rutas():
     respuesta = []
     try:
-        # Consulta todos los documentos en la colección "asignacion"
+        # Consulta todos los documentos en la colección "ruta"
         rutas = RUTA.find()
 
         for ruta in rutas:
@@ -149,12 +150,29 @@ async def get_all_rutas():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error interno del servidor, {e}")
     
-# Define el endpoint GET para consultar todos los documentos en la colección "checador"
+# Define el endpoint GET para consultar todos los documentos en la colección "ruta"
+@app.get("/horarios/")
+async def get_all_rutas():
+    respuesta = []
+    try:
+        # Consulta todos los documentos en la colección "ruta"
+        horarios = HORARIOS.find()
+
+        for horarios in horarios:
+            horarios['_id'] = str(horarios['_id'])
+            respuesta.append(horarios)
+
+        return respuesta
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error interno del servidor, {e}")
+    
+# Define el endpoint GET para consultar todos los documentos en la colección "unidades"
 @app.get("/unidades/")
 async def get_all_unidades():
     respuesta = []
     try:
-        # Consulta todos los documentos en la colección "asignacion"
+        # Consulta todos los documentos en la colección "unidades"
         unidades = UNIDADES.find()
 
         for unidad in unidades:
